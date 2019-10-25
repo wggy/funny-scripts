@@ -20,8 +20,10 @@ SERVER_PORT=11417
 
 #set JAVA_OPTS
 JAVA_OPTS="$-Dspring.profiles.active=test -Dserver.port=$SERVER_PORT"
-JAVA_OPTS="$JAVA_OPTS -jar -server -Xms2G -Xmx2G -Xmn512m -XX:MaxPermSize=64M"
+JAVA_OPTS="$JAVA_OPTS -jar -server -Xms2G -Xmx2G -Xmn1G -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m"
 JAVA_OPTS="$JAVA_OPTS -Xss256k"
+JAVA_OPTS="$JAVA_OPTS -XX:ParallelGCThreads=30"
+JAVA_OPTS="$JAVA_OPTS -XX:SurvivorRatio=8"
 JAVA_OPTS="$JAVA_OPTS -XX:+AggressiveOpts"
 JAVA_OPTS="$JAVA_OPTS -XX:+UseBiasedLocking"
 JAVA_OPTS="$JAVA_OPTS -XX:+UseFastAccessorMethods"
@@ -32,6 +34,7 @@ JAVA_OPTS="$JAVA_OPTS -XX:+CMSParallelRemarkEnabled"
 JAVA_OPTS="$JAVA_OPTS -XX:+UseCMSCompactAtFullCollection"
 JAVA_OPTS="$JAVA_OPTS -XX:+UseCMSInitiatingOccupancyOnly"
 JAVA_OPTS="$JAVA_OPTS -XX:CMSInitiatingOccupancyFraction=75"
+JAVA_OPTS="$JAVA_OPTS -XX:TargetSurvivorRatio=90"
 
 #GC Log Options
 JAVA_OPTS="$JAVA_OPTS -verbose:gc -Xloggc:${GC_LOG}"
